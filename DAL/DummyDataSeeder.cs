@@ -13,7 +13,6 @@ public class DummyDataSeeder
 
         // Adding to list
         InMemoryRepository.Farms.AddRange(new Farm[] { sunnyMeadowFarm, greenValleyEstate, oldOakHomestead, riverbendFarmstead });
-
         // Animals
         Animal holsteinCow = new Animal("Holstein", 10, 500, AnimalType.Cow);
         Animal jerseyCow = new Animal("Jersey", 12, 520, AnimalType.Cow);
@@ -46,29 +45,29 @@ public class DummyDataSeeder
 
 
        // Linking
-        holsteinCow.AddFarm(sunnyMeadowFarm);
-        jerseyCow.AddFarm(sunnyMeadowFarm); 
-        jerseyCow.AddFarm(greenValleyEstate);
-        angusCow.AddFarm(greenValleyEstate);
+        holsteinCow.ConnectToFarm(sunnyMeadowFarm);
+        jerseyCow.ConnectToFarm(sunnyMeadowFarm); 
+        jerseyCow.ConnectToFarm(greenValleyEstate);
+        angusCow.ConnectToFarm(greenValleyEstate);
 
-        berkshirePig.AddFarm(sunnyMeadowFarm);
-        largeWhitePig.AddFarm(greenValleyEstate); 
-        largeWhitePig.AddFarm(oldOakHomestead);
-        durocPig.AddFarm(oldOakHomestead);
+        berkshirePig.ConnectToFarm(sunnyMeadowFarm);
+        largeWhitePig.ConnectToFarm(greenValleyEstate); 
+        largeWhitePig.ConnectToFarm(oldOakHomestead);
+        durocPig.ConnectToFarm(oldOakHomestead);
 
-        silkieChicken.AddFarm(oldOakHomestead);
-        leghornChicken.AddFarm(riverbendFarmstead);
-        rhodeIslandChicken.AddFarm(greenValleyEstate);
+        silkieChicken.ConnectToFarm(oldOakHomestead);
+        leghornChicken.ConnectToFarm(riverbendFarmstead);
+        rhodeIslandChicken.ConnectToFarm(greenValleyEstate);
 
-        merinoSheep.AddFarm(greenValleyEstate);
-        suffolkSheep.AddFarm(riverbendFarmstead);
+        merinoSheep.ConnectToFarm(greenValleyEstate);
+        suffolkSheep.ConnectToFarm(riverbendFarmstead);
 
-        alpineGoat.AddFarm(sunnyMeadowFarm);
-        boerGoat.AddFarm(oldOakHomestead);
+        alpineGoat.ConnectToFarm(sunnyMeadowFarm);
+        boerGoat.ConnectToFarm(oldOakHomestead);
 
-        friesianHorse.AddFarm(riverbendFarmstead);
-        arabianHorse.AddFarm(greenValleyEstate);
-        thoroughbredHorse.AddFarm(sunnyMeadowFarm);
+        friesianHorse.ConnectToFarm(riverbendFarmstead);
+        arabianHorse.ConnectToFarm(greenValleyEstate);
+        thoroughbredHorse.ConnectToFarm(sunnyMeadowFarm);
 
 
         // harvests

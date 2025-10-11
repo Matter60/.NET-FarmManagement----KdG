@@ -25,7 +25,7 @@ public class InMemoryRepository : IRepository
     }
 
 
-    public IEnumerable<Farm> ReadFarmsByLocation(string location)
+    public List<Farm> ReadFarmsByLocation(string location)
     {
         List<Farm> filtered = new List<Farm>();
         foreach (Farm farm in Farms)
@@ -41,6 +41,7 @@ public class InMemoryRepository : IRepository
     public void CreateFarm(Farm farm)
     {
         Farms.Add(farm);
+       
     }
 
     public Animal ReadAnimal(int id)
@@ -61,13 +62,13 @@ public class InMemoryRepository : IRepository
         return Animals;
     }
 
-    public IEnumerable<Animal> ReadAnimalsByTypeAndLifespan(int? type, int? lifespan)
+    public List<Animal> ReadAnimalsByTypeAndLifespan(int? type, int? minimumLifespan)
     {
         List<Animal> filtered = new List<Animal>();
         foreach (Animal animal in Animals)
         {
             bool matchesType = !type.HasValue || (int)animal.Type == type.Value;
-            bool matchesLifespan = !lifespan.HasValue || animal.Lifespan >= lifespan.Value;
+            bool matchesLifespan = !minimumLifespan.HasValue || animal.Lifespan >= minimumLifespan.Value;
 
             if (matchesType && matchesLifespan)
             {
@@ -80,5 +81,6 @@ public class InMemoryRepository : IRepository
     public void CreateAnimal(Animal animal)
     {
         Animals.Add(animal);
+        
     }
 }

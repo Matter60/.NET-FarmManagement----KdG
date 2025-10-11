@@ -1,4 +1,5 @@
-﻿using FarmManagement.BL.Domain;
+﻿using System.ComponentModel.DataAnnotations;
+using FarmManagement.BL.Domain;
 using FarmManagement.DAL;
 
 
@@ -23,16 +24,24 @@ public class Manager : IManager
         return _repository.ReadAllFarms();
     }
 
-    public IEnumerable<Farm> GetFarmsByLocation(string location)
+    public List<Farm> GetFarmsByLocation(string location)
     {
         return _repository.ReadFarmsByLocation(location);
     }
 
-    public Farm AddFarm(string name, string location, int sizeInHectares, int establisedYear)
+    public Farm AddFarm(string name, string location, int establishedYear, double? sizeInHectares)
     {
-        Farm farm = new Farm(name, location, sizeInHectares, establisedYear);
-        _repository.CreateFarm(farm);
-        return farm;
+        Farm farmToCreate = new Farm(name,location,establishedYear,sizeInHectares);
+        List<ValidationResult> errors = new List<ValidationResult>();
+        bool isValid = Validator.TryValidateObject(farmToCreate, new ValidationContext(farmToCreate), errors, true);
+
+        if (!isValid)
+        {
+            throw new ValidationException(String.Join('|', errors));
+        }
+      _repository.CreateFarm(farmToCreate);
+      return farmToCreate;
+        
     }
 
     public Animal GetAnimal(int id)
@@ -45,15 +54,22 @@ public class Manager : IManager
         return _repository.ReadAllAnimals();
     }
 
-    public IEnumerable<Animal> GetAnimalsByTypeAndLifespan(int? type, int? lifespan)
+    public List<Animal> GetAnimalsByTypeAndLifespan(int? type, int? minimumLifespan)
     {
-        return _repository.ReadAnimalsByTypeAndLifespan(type, lifespan);
+        return _repository.ReadAnimalsByTypeAndLifespan(type, minimumLifespan);
     }
 
     public Animal AddAnimal(string species, int lifespan, double averageWeight, AnimalType type)
     {
-        Animal animal = new Animal(species,lifespan,averageWeight,type);
-        _repository.CreateAnimal(animal);
-        return animal;
+        Animal animalToCreate = new Animal(species,lifespan,averageWeight,type);
+        List<ValidationResult> errors = new List<ValidationResult>();
+        bool isValid =  Validator.TryValidateObject(animalToCreate, new ValidationContext(animalToCreate), errors, true);
+
+        if (!isValid)
+        {
+            throw new ValidationException(String.Join('|', errors));
+        }
+       _repository.CreateAnimal(animalToCreate);
+       return animalToCreate;
     }
 }

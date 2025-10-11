@@ -1,4 +1,6 @@
-﻿namespace FarmManagement.BL.Domain;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FarmManagement.BL.Domain;
 
 public class Animal
 {
@@ -6,10 +8,17 @@ public class Animal
 
     public int Id { get; private set; }
     
+    [Range(0.1, 2500)]
     public double AverageWeight { get; set; }
+    
+    [Required]
     public AnimalType Type { get; set; }
+    
+    [Range(1, 100)]
     public int Lifespan { get; set; }
     
+    [Required]
+    [StringLength(40,MinimumLength = 2)]
     public string Species { get; set; }
     public ICollection<Farm> Farms { get; set; }
 
@@ -31,7 +40,7 @@ public class Animal
 
     
     
-    public void AddFarm(Farm farm)
+    public void ConnectToFarm(Farm farm)
     {
         // Ensure this farm is not already linked to the animal
         if (!Farms.Contains(farm))

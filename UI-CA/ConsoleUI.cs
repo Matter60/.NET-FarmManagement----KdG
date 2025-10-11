@@ -1,4 +1,5 @@
-﻿using FarmManagement.BL;
+﻿using System.ComponentModel.DataAnnotations;
+using FarmManagement.BL;
 using FarmManagement.BL.Domain;
 namespace CA;
 
@@ -50,6 +51,15 @@ public class ConsoleUI
                 case 4:
                     FilterAnimals();
                     break;
+                case 5:
+                    AddFarm();
+                    break;
+                case 6:
+                    AddAnimal();
+                    break;
+                default:
+                    Console.WriteLine("Please enter a number between 0 and 6.");
+                    break;
             }
         }
     }
@@ -70,21 +80,14 @@ public class ConsoleUI
 
     private void FilterFarms()
     {
-        List<Farm> filtered = new List<Farm>();
         Console.Write("Enter location: ");
         string location = Console.ReadLine();
 
-        foreach (Farm farm in _farms)
-        {
-            if (farm.Location.IndexOf(location, StringComparison.OrdinalIgnoreCase) >= 0) // niet case sensitive
-            {
-                filtered.Add(farm);
-            }
-        }
+        List<Farm> filtered = _mgr.GetFarmsByLocation(location);
 
         if (filtered.Count == 0)
         {
-            Console.WriteLine("No farms found in {0}", location);
+            Console.WriteLine($"No farms found in {location}");
         }
         else
         {
@@ -102,7 +105,7 @@ public class ConsoleUI
         Console.WriteLine("All Animals");
         Console.WriteLine("===========");
 
-        foreach (Animal animal in _animals)
+        foreach (Animal animal in _mgr.GetAllAnimals())
         {
             Console.WriteLine(animal);
         }
@@ -129,28 +132,28 @@ public class ConsoleUI
 
         if (!string.IsNullOrEmpty(typeInput))
         {
-            if (int.TryParse(typeInput, out int type) && (type >= 0 && type < types.Length))
+            if (int.TryParse(typeInput, out int type) && Enum.IsDefined(typeof(AnimalType), type))
             {
                 typeResult = type;
             }
             else
             {
-                Console.WriteLine("Please enter an number between 0 and " + types.Length);
+                Console.WriteLine("Please enter a number between 1 and " + types.Length);
                 Console.WriteLine();
                 return;
             }
         }
 
         Console.Write("Enter minimum livespan or leave blank:");
-        string livespanInput = Console.ReadLine();
+        string lifespanInput = Console.ReadLine();
 
-        double? minimumLivespan = null;
+        int? minimumLifespan = null;
 
-        if (!string.IsNullOrWhiteSpace(livespanInput))
+        if (!string.IsNullOrWhiteSpace(lifespanInput))
         {
-            if (double.TryParse(livespanInput, out double parsedLivespan))
+            if (int.TryParse(lifespanInput, out int parsedLivespan))
             {
-                minimumLivespan = parsedLivespan;
+                minimumLifespan = parsedLivespan;
             }
             else
             {
@@ -159,13 +162,16 @@ public class ConsoleUI
                 return;
             }
         }
+        
+        List<Animal> filtered = _mgr.GetAnimalsByTypeAndLifespan(typeResult, minimumLifespan);
 
-        foreach (Animal animal in _animals)
+        if (filtered.Count == 0)
         {
-            bool matchesType = !typeResult.HasValue || (int)animal.Type == typeResult.Value;
-            bool matchesLifespan = !minimumLivespan.HasValue || animal.Lifespan >= minimumLivespan.Value;
-
-            if (matchesType && matchesLifespan)
+            Console.WriteLine("No animals found with the given criteria.");
+        }
+        else
+        {
+            foreach (Animal animal in filtered)
             {
                 Console.WriteLine(animal);
             }
@@ -173,6 +179,68 @@ public class ConsoleUI
 
         Console.WriteLine();
     }
+
+    private void AddFarm()
+    {
+        Console.WriteLine("Add Farm");
+        Console.WriteLine("========");
+
+        while (true)
+        {
+            Console.Write("Name: ");
+            string name = Console.ReadLine();
+
+            Console.Write("Location: ");
+            string location = Console.ReadLine();
+            
+            Console.Write("Established year: ");
+            string yearInput = Console.ReadLine();
+            if (!int.TryParse(yearInput, out int year))
+            {
+                Console.WriteLine("Please enter a valid year.");
+                continue;
+            }
+
+            Console.Write("Size in hectares (optional): ");
+            string sizeInput = Console.ReadLine();
+            double? sizeResult = null;
+            if (!string.IsNullOrWhiteSpace(sizeInput))
+            {
+                if (double.TryParse(sizeInput, out double size))
+                {
+                    sizeResult = size;
+                }
+                else
+                {
+                    Console.WriteLine("Please enter a valid number for size in hectares.");
+                    continue;
+                }
+            }
+
+            try
+            {
+                Farm newFarm = _mgr.AddFarm(name, location,year,sizeResult);
+                Console.WriteLine("Farm added successfully.");
+                break;
+            }
+            catch (ValidationException exception)
+            {
+                string [] errorMessages = exception.Message.Split("|");
+                foreach (string errorMessage in errorMessages) 
+                {
+                    Console.WriteLine($"Error: {errorMessage}");
+                    Console.WriteLine("Please try again...");
+                }
+            }
+        }
+        Console.WriteLine();
+    }
+
+    private void AddAnimal()
+    {
+        
+    }
+
 
     private void ShowMenu()
     {
@@ -182,7 +250,9 @@ public class ConsoleUI
         Console.WriteLine("2) Show farms from location");
         Console.WriteLine("3) Show all animals");
         Console.WriteLine("4) Show all animals of type and/or minimum lifespan");
+        Console.WriteLine("5) Add a Farm");
+        Console.WriteLine("6) Add a Animal");
 
-        Console.Write("Choice (0-4): ");
+        Console.Write("Choice (0-6): ");
     }
 }
