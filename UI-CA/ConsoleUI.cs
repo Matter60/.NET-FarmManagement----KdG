@@ -6,19 +6,13 @@ namespace CA;
 
 public class ConsoleUI
 {
-    
     private readonly IManager _mgr;
-
     public ConsoleUI(IManager manager)
     {
         _mgr = manager;
     }
-   
-
     public void Run()
     {
-      
-
         bool running = true;
 
         Console.WriteLine("Welcome to the Farm Management Project");
@@ -64,9 +58,7 @@ public class ConsoleUI
             }
         }
     }
-
     
-
     private void ShowAllFarms()
     {
         Console.WriteLine("All Farms");
@@ -117,15 +109,7 @@ public class ConsoleUI
     private void FilterAnimals()
     {
         Console.Write("Type: ");
-        AnimalType[] types = (AnimalType[])Enum.GetValues(typeof(AnimalType));
-        for (int i = 0; i < types.Length; i++)
-        {
-            Console.Write($"{(int)types[i]}={types[i]}");
-            if (i < types.Length - 1)
-                Console.Write(", ");
-        }
-
-        Console.Write(": ");
+        AnimalType[] types = ShowAnimalTypes();
 
         string typeInput = Console.ReadLine();
 
@@ -267,15 +251,7 @@ public class ConsoleUI
             }
             
             Console.Write("Type: ");
-            AnimalType[] types = (AnimalType[])Enum.GetValues(typeof(AnimalType));
-            for (int i = 0; i < types.Length; i++)
-            {
-                Console.Write($"{(int)types[i]}={types[i]}");
-                if (i < types.Length - 1)
-                    Console.Write(", ");
-            }
-
-            Console.Write(": ");
+            AnimalType[] types = ShowAnimalTypes();
 
             string typeInput = Console.ReadLine();
 
@@ -304,8 +280,7 @@ public class ConsoleUI
             }
         }
     }
-
-
+    
     private void ShowMenu()
     {
         Console.WriteLine("What would you like to do?");
@@ -319,4 +294,18 @@ public class ConsoleUI
 
         Console.Write("Choice (0-6): ");
     }
+    
+    private AnimalType[] ShowAnimalTypes()
+    {
+        var types = Enum.GetValues<AnimalType>();
+        for (int i = 0; i < types.Length; i++)
+        {
+            Console.Write($"{(int)types[i]}={types[i]}");
+            if (i < types.Length - 1)
+                Console.Write(", ");
+        }
+        Console.Write(": ");
+        return types;
+    }
+
 }
