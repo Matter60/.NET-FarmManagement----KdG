@@ -3,8 +3,8 @@ namespace FarmManagement.DAL;
 
 public class InMemoryRepository : IRepository
 {
-    public static List<Farm> Farms { get; set; }= new List<Farm>();
-    public static List<Animal> Animals { get; set; } = new List<Animal>();
+    internal static List<Farm> Farms { get; }= new();
+    internal static List<Animal> Animals { get; } = new();
 
     public Farm ReadFarm(int id)
     {
@@ -25,7 +25,7 @@ public class InMemoryRepository : IRepository
     }
 
 
-    public List<Farm> ReadFarmsByLocation(string location)
+    public IEnumerable<Farm> ReadFarmsByLocation(string location)
     {
         List<Farm> filtered = new List<Farm>();
         foreach (Farm farm in Farms)
@@ -63,7 +63,7 @@ public class InMemoryRepository : IRepository
         return Animals;
     }
 
-    public List<Animal> ReadAnimalsByTypeAndLifespan(int? type, int? minimumLifespan)
+    public IEnumerable<Animal> ReadAnimalsByTypeAndLifespan(int? type, int? minimumLifespan)
     {
         List<Animal> filtered = new List<Animal>();
         foreach (Animal animal in Animals)

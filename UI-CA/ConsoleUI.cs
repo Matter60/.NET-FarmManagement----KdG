@@ -76,9 +76,9 @@ public class ConsoleUI
         Console.Write("Enter location: ");
         string location = Console.ReadLine();
 
-        List<Farm> filtered = _mgr.GetFarmsByLocation(location);
+        IEnumerable<Farm> filtered = _mgr.GetFarmsByLocation(location).ToList();
 
-        if (filtered.Count == 0)
+        if (!filtered.Any())
         {
             Console.WriteLine($"No farms found in {location}");
         }
@@ -148,9 +148,9 @@ public class ConsoleUI
             }
         }
         
-        List<Animal> filtered = _mgr.GetAnimalsByTypeAndLifespan(typeResult, minimumLifespan);
+        IEnumerable<Animal> filtered = _mgr.GetAnimalsByTypeAndLifespan(typeResult, minimumLifespan).ToList();
 
-        if (filtered.Count == 0)
+        if (!filtered.Any())
         {
             Console.WriteLine("No animals found with the given criteria.");
         }

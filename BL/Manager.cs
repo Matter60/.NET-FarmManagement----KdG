@@ -24,7 +24,7 @@ public class Manager : IManager
         return _repository.ReadAllFarms();
     }
 
-    public List<Farm> GetFarmsByLocation(string location)
+    public IEnumerable<Farm> GetFarmsByLocation(string location)
     {
         return _repository.ReadFarmsByLocation(location);
     }
@@ -54,7 +54,7 @@ public class Manager : IManager
         return _repository.ReadAllAnimals();
     }
 
-    public List<Animal> GetAnimalsByTypeAndLifespan(int? type, int? minimumLifespan)
+    public IEnumerable<Animal> GetAnimalsByTypeAndLifespan(int? type, int? minimumLifespan)
     {
         return _repository.ReadAnimalsByTypeAndLifespan(type, minimumLifespan);
     }
