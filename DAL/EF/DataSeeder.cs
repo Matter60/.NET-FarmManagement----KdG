@@ -4,19 +4,18 @@ namespace FarmManagement.DAL.EF;
 
 public static class DataSeeder
 {
-
-   
     public static void Seed(FarmManagementDbContext farmManagementDbContext)
     {
-  // Farms
+        // Farms
         Farm sunnyMeadowFarm = new Farm("Sunny Meadow Farm", "Netherlands", 1995, 50);
         Farm greenValleyEstate = new Farm("Green Valley Estate", "Belgium", 2000, 74.2);
         Farm oldOakHomestead = new Farm("Old Oak Homestead", "Germany", 1980);
         Farm riverbendFarmstead = new Farm("Riverbend Farmstead", "Netherlands", 2010, 60);
-        
+
 
         // Adding to list
-        farmManagementDbContext.Farms.AddRange(new Farm[] { sunnyMeadowFarm, greenValleyEstate, oldOakHomestead, riverbendFarmstead });
+        farmManagementDbContext.Farms.AddRange(new Farm[]
+            { sunnyMeadowFarm, greenValleyEstate, oldOakHomestead, riverbendFarmstead });
         // Animals
         Animal holsteinCow = new Animal("Holstein", 10, 500, AnimalType.Cow);
         Animal jerseyCow = new Animal("Jersey", 12, 520, AnimalType.Cow);
@@ -41,21 +40,22 @@ public static class DataSeeder
         Animal thoroughbredHorse = new Animal("Thoroughbred", 14, 420, AnimalType.Horse);
 
 
-
         farmManagementDbContext.Animals.AddRange(new Animal[]
         {
-            holsteinCow, jerseyCow, angusCow, berkshirePig, largeWhitePig, durocPig, silkieChicken, leghornChicken, rhodeIslandChicken, merinoSheep, suffolkSheep, alpineGoat, boerGoat, friesianHorse, arabianHorse, thoroughbredHorse
+            holsteinCow, jerseyCow, angusCow, berkshirePig, largeWhitePig, durocPig, silkieChicken, leghornChicken,
+            rhodeIslandChicken, merinoSheep, suffolkSheep, alpineGoat, boerGoat, friesianHorse, arabianHorse,
+            thoroughbredHorse
         });
 
 
-       // Linking
+        // Linking
         holsteinCow.ConnectToFarm(sunnyMeadowFarm);
-        jerseyCow.ConnectToFarm(sunnyMeadowFarm); 
+        jerseyCow.ConnectToFarm(sunnyMeadowFarm);
         jerseyCow.ConnectToFarm(greenValleyEstate);
         angusCow.ConnectToFarm(greenValleyEstate);
 
         berkshirePig.ConnectToFarm(sunnyMeadowFarm);
-        largeWhitePig.ConnectToFarm(greenValleyEstate); 
+        largeWhitePig.ConnectToFarm(greenValleyEstate);
         largeWhitePig.ConnectToFarm(oldOakHomestead);
         durocPig.ConnectToFarm(oldOakHomestead);
 
@@ -75,26 +75,40 @@ public static class DataSeeder
 
 
         // harvests
-      
-        sunnyMeadowFarm.Harvests.Add(new Harvest(CropType.Carrot, new DateOnly(2019, 4, 15), 28000.75, sunnyMeadowFarm));
-        sunnyMeadowFarm.Harvests.Add(new Harvest(CropType.Wheat, new DateOnly(2020, 7, 18), 13500.40, sunnyMeadowFarm));
-        sunnyMeadowFarm.Harvests.Add(new Harvest(CropType.Corn, new DateOnly(2021, 6, 5), 4500.20, sunnyMeadowFarm));
+
+// Sunny Meadow Farm Harvests
+        var carrotHarvestSunny = new Harvest(CropType.Carrot, new DateOnly(2019, 4, 15), 28000.75, sunnyMeadowFarm);
+        var wheatHarvestSunny = new Harvest(CropType.Wheat, new DateOnly(2020, 7, 18), 13500.40, sunnyMeadowFarm);
+        var cornHarvestSunny = new Harvest(CropType.Corn, new DateOnly(2021, 6, 5), 4500.20, sunnyMeadowFarm);
+
+// Green Valley Estate Harvests
+        var tomatoHarvestGreen = new Harvest(CropType.Tomato, new DateOnly(2019, 6, 30), 9200.00, greenValleyEstate);
+        var carrotHarvestGreen = new Harvest(CropType.Carrot, new DateOnly(2020, 8, 25), 11000.90, greenValleyEstate);
+        var lettuceHarvestGreen = new Harvest(CropType.Lettuce, new DateOnly(2021, 9, 10), 8800.60, greenValleyEstate);
+        var wheatHarvestGreen = new Harvest(CropType.Wheat, new DateOnly(2022, 10, 12), 7000.30, greenValleyEstate);
+        var potatoHarvestGreen = new Harvest(CropType.Potato, new DateOnly(2022, 9, 5), 12000.00, greenValleyEstate);
+
+// Old Oak Homestead Harvests
+        var lettuceHarvestOldOak = new Harvest(CropType.Lettuce, new DateOnly(2019, 5, 22), 6700.80, oldOakHomestead);
+        var potatoHarvestOldOak = new Harvest(CropType.Potato, new DateOnly(2020, 10, 14), 14500.25, oldOakHomestead);
+        var cornHarvestOldOak = new Harvest(CropType.Corn, new DateOnly(2021, 9, 2), 16000.00, oldOakHomestead);
+        var wheatHarvestOldOak = new Harvest(CropType.Wheat, new DateOnly(2022, 7, 28), 9300.55, oldOakHomestead);
+
+// Riverbend Farmstead Harvests
+        var lettuceHarvestRiverbend =
+            new Harvest(CropType.Lettuce, new DateOnly(2019, 6, 12), 8700.40, riverbendFarmstead);
+        var appleHarvestRiverbend =
+            new Harvest(CropType.Apple, new DateOnly(2020, 9, 21), 12500.75, riverbendFarmstead);
+        var tomatoHarvestRiverbend =
+            new Harvest(CropType.Tomato, new DateOnly(2021, 10, 5), 5800.10, riverbendFarmstead);
 
 
-        greenValleyEstate.Harvests.Add(new Harvest(CropType.Tomato, new DateOnly(2019, 6, 30), 9200.00, greenValleyEstate));
-        greenValleyEstate.Harvests.Add(new Harvest(CropType.Carrot, new DateOnly(2020, 8, 25), 11000.90, greenValleyEstate));
-        greenValleyEstate.Harvests.Add(new Harvest(CropType.Lettuce, new DateOnly(2021, 9, 10), 8800.60, greenValleyEstate));
-        greenValleyEstate.Harvests.Add(new Harvest(CropType.Wheat, new DateOnly(2022, 10, 12), 7000.30, greenValleyEstate));
-        greenValleyEstate.Harvests.Add(new Harvest(CropType.Potato, new DateOnly(2022, 9, 5), 12000.00, greenValleyEstate));
-
-        oldOakHomestead.Harvests.Add(new Harvest(CropType.Lettuce, new DateOnly(2019, 5, 22), 6700.80, oldOakHomestead));
-        oldOakHomestead.Harvests.Add(new Harvest(CropType.Potato, new DateOnly(2020, 10, 14), 14500.25, oldOakHomestead));
-        oldOakHomestead.Harvests.Add(new Harvest(CropType.Corn, new DateOnly(2021, 9, 2), 16000.00, oldOakHomestead));
-        oldOakHomestead.Harvests.Add(new Harvest(CropType.Wheat, new DateOnly(2022, 7, 28), 9300.55, oldOakHomestead));
-        
-        riverbendFarmstead.Harvests.Add(new Harvest(CropType.Lettuce, new DateOnly(2019, 6, 12), 8700.40, riverbendFarmstead));
-        riverbendFarmstead.Harvests.Add(new Harvest(CropType.Apple, new DateOnly(2020, 9, 21), 12500.75, riverbendFarmstead));
-        riverbendFarmstead.Harvests.Add(new Harvest(CropType.Tomato, new DateOnly(2021, 10, 5), 5800.10, riverbendFarmstead));
+        farmManagementDbContext.Harvests.AddRange(
+            carrotHarvestSunny, wheatHarvestSunny, cornHarvestSunny,
+            tomatoHarvestGreen, carrotHarvestGreen, lettuceHarvestGreen, wheatHarvestGreen, potatoHarvestGreen,
+            lettuceHarvestOldOak, potatoHarvestOldOak, cornHarvestOldOak, wheatHarvestOldOak,
+            lettuceHarvestRiverbend, appleHarvestRiverbend, tomatoHarvestRiverbend
+        );
 
 
         farmManagementDbContext.SaveChanges();

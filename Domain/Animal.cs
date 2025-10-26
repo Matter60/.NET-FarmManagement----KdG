@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FarmManagement.BL.Domain;
 
@@ -18,7 +19,13 @@ public class Animal
     [Required]
     [StringLength(40,MinimumLength = 2)]
     public string Species { get; set; }
+    [NotMapped]
     public ICollection<Farm> Farms { get; set; }
+
+    public Animal()
+    {
+        
+    }
 
     public Animal(string species, int lifespan, double averageWeight, AnimalType type)
     {

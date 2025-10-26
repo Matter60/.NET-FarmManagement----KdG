@@ -117,7 +117,7 @@ public class ConsoleUI
 
         if (!string.IsNullOrEmpty(typeInput))
         {
-            if (Enum.TryParse(typeInput, out AnimalType type))
+            if (Enum.TryParse(typeInput, out AnimalType type) && Enum.IsDefined(typeof(AnimalType), type))
             {
                 typeResult = type;
             }
@@ -214,8 +214,9 @@ public class ConsoleUI
                 foreach (string errorMessage in errorMessages) 
                 {
                     Console.WriteLine($"Error: {errorMessage}");
-                    Console.WriteLine("Please try again...");
+                    
                 }
+                Console.WriteLine("Please try again...");
             }
         }
         Console.WriteLine();
@@ -255,13 +256,13 @@ public class ConsoleUI
 
             string typeInput = Console.ReadLine();
 
-            if (!byte.TryParse(typeInput, out byte type) || !Enum.IsDefined(typeof(AnimalType), type))
+            if (!Enum.TryParse(typeInput, out AnimalType type) || !Enum.IsDefined(typeof(AnimalType), type))
             {
                 Console.WriteLine("Please enter a number between 1 and " + types.Length);
                 continue;
             }
             
-            AnimalType selectedType = (AnimalType)type;
+            AnimalType selectedType = type;
             
             try
             {
@@ -275,8 +276,8 @@ public class ConsoleUI
                 foreach (string errorMessage in errorMessages)
                 {
                     Console.WriteLine($"Error: {errorMessage}");
-                    Console.WriteLine("Please try again...");
                 }
+                Console.WriteLine("Please try again...");
             }
         }
     }

@@ -25,7 +25,7 @@ public class FarmManagementDbContext : DbContext
         optionsBuilder.LogTo(msg => Debug.WriteLine(msg), LogLevel.Information);
     }
 
-    protected bool CreateDatabase(bool deleteDb)
+    public bool CreateDatabase(bool deleteDb)
     {
         if (deleteDb)
         {

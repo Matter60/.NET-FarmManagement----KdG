@@ -23,21 +23,13 @@ public class Repository : IRepository
 
     public IEnumerable<Farm> ReadFarmsByLocation(string location)
     {
-        IQueryable<Farm> farms = _ctx.Farms;
-
-        if (!string.IsNullOrEmpty(location))
-        {
-            farms = farms.Where(farm => farm.Location.ToLower().Contains(location.ToLower()));
-        }
-
-        return farms.ToList();
+        return _ctx.Farms.Where(farm => farm.Location.ToLower().Contains(location.ToLower())).ToList();
     }
 
     public void CreateFarm(Farm farm)
     {
         _ctx.Farms.Add(farm);
         _ctx.SaveChanges();
-        
     }
 
     public Animal ReadAnimal(int id)

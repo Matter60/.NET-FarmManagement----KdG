@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FarmManagement.BL.Domain;
 public class Farm : IValidatableObject
@@ -16,17 +17,25 @@ public class Farm : IValidatableObject
     [Range(0.1, double.MaxValue)]
     public double? SizeInHectares { get; set; }
     
-    [RegularExpression(@"^\d{4}$")]
+    [RegularExpression(@"^\d{4}$", ErrorMessage = "exactly 4 digits")]
     public int EstablishedYear { get; set; }
+    
+    [NotMapped]
     public ICollection<Harvest> Harvests { get; set; }
+    [NotMapped]
     public ICollection<Animal> Animals { get; set; }
 
-    public Farm(string name, string location, int establisedYear,double? sizeInHectares = null)
+    public Farm()
+    {
+        
+    }
+
+    public Farm(string name, string location, int establishedYear,double? sizeInHectares = null)
     {
         Name = name;
         Location = location;
         SizeInHectares = sizeInHectares;
-        EstablishedYear = establisedYear;
+        EstablishedYear = establishedYear;
         Harvests = new List<Harvest>();
         Animals = new List<Animal>();
     }
