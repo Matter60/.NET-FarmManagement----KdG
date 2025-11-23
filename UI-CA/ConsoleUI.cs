@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using CA.Extensions;
 using FarmManagement.BL;
 using FarmManagement.BL.Domain;
+using FarmManagement.UI.CA.Extensions;
+
 namespace FarmManagement.UI.CA;
 
 public class ConsoleUI

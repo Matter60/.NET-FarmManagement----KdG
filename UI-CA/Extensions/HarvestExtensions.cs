@@ -1,6 +1,6 @@
 ﻿using FarmManagement.BL.Domain;
 
-namespace CA.Extensions;
+namespace FarmManagement.UI.CA.Extensions;
 
 public static class HarvestExtensions
 {
