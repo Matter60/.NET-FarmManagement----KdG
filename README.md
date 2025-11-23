@@ -42,3 +42,19 @@ WHERE "a"."Lifespan" >= @__minimumLifespan_0
 SELECT "a"."Id", "a"."AverageWeight", "a"."Lifespan", "a"."Species", "a"."Type"
 FROM "Animals" AS "a"
 ```
+
+## Sprint 4
+
+```mermaid
+classDiagram
+class Animal
+class FarmAnimal
+class Farm
+class Harvest
+
+Animal "1" -- "*" FarmAnimal
+FarmAnimal "*" -- "1" Farm
+Farm "1" -- "*" Harvest
+```
+
+
