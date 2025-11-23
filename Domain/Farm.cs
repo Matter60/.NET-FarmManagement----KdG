@@ -20,10 +20,9 @@ public class Farm : IValidatableObject
     [RegularExpression(@"^\d{4}$", ErrorMessage = "exactly 4 digits")]
     public int EstablishedYear { get; set; }
     
-    [NotMapped]
-    public ICollection<Harvest> Harvests { get; set; }
-    [NotMapped]
-    public ICollection<Animal> Animals { get; set; }
+    public ICollection<Harvest> Harvests { get; set; } = new List<Harvest>();
+
+    public ICollection<FarmAnimal> FarmAnimals { get; set; } = [];
 
     public Farm()
     {
@@ -36,8 +35,6 @@ public class Farm : IValidatableObject
         Location = location;
         SizeInHectares = sizeInHectares;
         EstablishedYear = establishedYear;
-        Harvests = new List<Harvest>();
-        Animals = new List<Animal>();
     }
     
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

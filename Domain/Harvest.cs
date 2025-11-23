@@ -14,7 +14,8 @@ public class Harvest
 
     public double Quantity { get; set; }
     
-    [NotMapped]
+    public int FarmId { get; set; }
+    
     public Farm Farm { get; set; }
 
     public Harvest()

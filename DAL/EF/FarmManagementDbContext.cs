@@ -11,6 +11,9 @@ public class FarmManagementDbContext : DbContext
     public DbSet<Farm> Farms { get; set; }
     public DbSet<Animal> Animals { get; set; }
     public DbSet<Harvest> Harvests { get; set; }
+
+    public DbSet<FarmAnimal> FarmAnimals { get; set; }
+    
     
     public FarmManagementDbContext(DbContextOptions options)
         :base(options)
@@ -32,5 +35,37 @@ public class FarmManagementDbContext : DbContext
             Database.EnsureDeleted();
         }
         return Database.EnsureCreated();
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        
+       
+
+        modelBuilder.Entity<FarmAnimal>()
+            .HasOne(fa => fa.Farm)
+            .WithMany(f => f.FarmAnimals)
+            .HasForeignKey("FkFarmId")
+            .IsRequired();
+        
+        modelBuilder.Entity<FarmAnimal>()
+            .HasOne(fa => fa.Animal)
+            .WithMany(a => a.FarmAnimals)
+            .HasForeignKey("FkAnimalId")
+            .IsRequired();
+        
+        modelBuilder.Entity<Harvest>()
+            .HasOne(f => f.Farm)
+            .WithMany(h => h.Harvests)
+            .HasForeignKey(h => h.FarmId)
+            .IsRequired();
+            
+        
+        
+        
+        modelBuilder.Entity<FarmAnimal>().HasKey("FkFarmId","FkAnimalId");
+
+
     }
 }

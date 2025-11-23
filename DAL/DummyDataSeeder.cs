@@ -46,7 +46,7 @@ public class DummyDataSeeder
 
 
        // Linking
-        holsteinCow.ConnectToFarm(sunnyMeadowFarm);
+        /*holsteinCow.ConnectToFarm(sunnyMeadowFarm);
         jerseyCow.ConnectToFarm(sunnyMeadowFarm); 
         jerseyCow.ConnectToFarm(greenValleyEstate);
         angusCow.ConnectToFarm(greenValleyEstate);
@@ -68,7 +68,7 @@ public class DummyDataSeeder
 
         friesianHorse.ConnectToFarm(riverbendFarmstead);
         arabianHorse.ConnectToFarm(greenValleyEstate);
-        thoroughbredHorse.ConnectToFarm(sunnyMeadowFarm);
+        thoroughbredHorse.ConnectToFarm(sunnyMeadowFarm);*/
 
 
         // harvests

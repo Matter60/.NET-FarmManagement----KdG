@@ -19,8 +19,8 @@ public class Animal
     [Required]
     [StringLength(40,MinimumLength = 2)]
     public string Species { get; set; }
-    [NotMapped]
-    public ICollection<Farm> Farms { get; set; }
+
+    public ICollection<FarmAnimal> FarmAnimals { get; set; } = [];
 
     public Animal()
     {
@@ -33,18 +33,17 @@ public class Animal
         Lifespan = lifespan;
         AverageWeight = averageWeight;
         Type = type;
-        Farms = new List<Farm>();
     }
     
 
     
-    public void ConnectToFarm(Farm farm)
+    /*public void ConnectToFarm(Farm farm)
     {
         // Ensure this farm is not already linked to the animal
-        if (!Farms.Contains(farm))
+        if (!FarmAnimals.Contains(farm))
         {
             // Link the farm to the animal
-            Farms.Add(farm);
+            FarmAnimals.Add(farm);
 
             // Ensure the animal is also linked to the farm
             if (!farm.Animals.Contains(this))
@@ -52,7 +51,7 @@ public class Animal
                 farm.Animals.Add(this);
             }
         }
-    }
+    }*/
 
 
 

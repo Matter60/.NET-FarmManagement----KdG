@@ -48,30 +48,35 @@ public static class DataSeeder
         });
 
 
-        // Linking
-        holsteinCow.ConnectToFarm(sunnyMeadowFarm);
-        jerseyCow.ConnectToFarm(sunnyMeadowFarm);
-        jerseyCow.ConnectToFarm(greenValleyEstate);
-        angusCow.ConnectToFarm(greenValleyEstate);
+        var farmAnimals = new List<FarmAnimal>
+        {
+            new() { Farm = sunnyMeadowFarm, Animal = holsteinCow, Count = 5 },
+            new() { Farm = sunnyMeadowFarm, Animal = jerseyCow, Count = 3 },
 
-        berkshirePig.ConnectToFarm(sunnyMeadowFarm);
-        largeWhitePig.ConnectToFarm(greenValleyEstate);
-        largeWhitePig.ConnectToFarm(oldOakHomestead);
-        durocPig.ConnectToFarm(oldOakHomestead);
+            new() { Farm = greenValleyEstate, Animal = jerseyCow, Count = 2 },
+            new() { Farm = greenValleyEstate, Animal = angusCow, Count = 4 },
 
-        silkieChicken.ConnectToFarm(oldOakHomestead);
-        leghornChicken.ConnectToFarm(riverbendFarmstead);
-        rhodeIslandChicken.ConnectToFarm(greenValleyEstate);
+            new() { Farm = sunnyMeadowFarm, Animal = berkshirePig, Count = 6 },
+            new() { Farm = greenValleyEstate, Animal = largeWhitePig, Count = 8 },
+            new() { Farm = oldOakHomestead, Animal = largeWhitePig, Count = 9 },
+            new() { Farm = oldOakHomestead, Animal = durocPig, Count = 3 },
 
-        merinoSheep.ConnectToFarm(greenValleyEstate);
-        suffolkSheep.ConnectToFarm(riverbendFarmstead);
+            new() { Farm = oldOakHomestead, Animal = silkieChicken, Count = 30 },
+            new() { Farm = riverbendFarmstead, Animal = leghornChicken, Count = 25 },
+            new() { Farm = greenValleyEstate, Animal = rhodeIslandChicken, Count = 20 },
 
-        alpineGoat.ConnectToFarm(sunnyMeadowFarm);
-        boerGoat.ConnectToFarm(oldOakHomestead);
+            new() { Farm = greenValleyEstate, Animal = merinoSheep, Count = 12 },
+            new() { Farm = riverbendFarmstead, Animal = suffolkSheep, Count = 10 },
 
-        friesianHorse.ConnectToFarm(riverbendFarmstead);
-        arabianHorse.ConnectToFarm(greenValleyEstate);
-        thoroughbredHorse.ConnectToFarm(sunnyMeadowFarm);
+            new() { Farm = sunnyMeadowFarm, Animal = alpineGoat, Count = 7 },
+            new() { Farm = oldOakHomestead, Animal = boerGoat, Count = 5 },
+
+            new() { Farm = riverbendFarmstead, Animal = friesianHorse, Count = 2 },
+            new() { Farm = greenValleyEstate, Animal = arabianHorse, Count = 1 },
+            new() { Farm = sunnyMeadowFarm, Animal = thoroughbredHorse, Count = 1 }
+        };
+        
+        farmManagementDbContext.FarmAnimals.AddRange(farmAnimals);
 
 
         // harvests
