@@ -86,7 +86,7 @@ public class Repository : IRepository
     public void DeleteFarmAnimal(int farmId, int animalId)
     {
         var farmAnimal = _ctx.FarmAnimals
-            .FirstOrDefault(fa => fa.FkFarmId == farmId && fa.FkAnimalId == animalId);
+            .Find(farmId,animalId);
 
         if (farmAnimal != null)
         {
@@ -99,12 +99,13 @@ public class Repository : IRepository
     public IEnumerable<Animal> ReadAnimalsOfFarm(int farmId)
     {
         return _ctx.Animals
-            .Where(f => f.FarmAnimals.Any(fa => fa.FkFarmId == farmId))
+            .Where(f => f.FarmAnimals.Any(fa => fa.Farm.Id == farmId))
             .ToList();
     }
 
-    public FarmAnimal ReadFarmAnimal(int farmId, int animalId)
+    public bool ReadFarmAnimalExists(int farmId, int animalId)
     {
-       return _ctx.FarmAnimals.FirstOrDefault(fa => fa.FkFarmId == farmId && fa.FkAnimalId == animalId);
+        return _ctx.FarmAnimals.Any(fa => fa.Farm.Id == farmId && fa.Animal.Id == animalId);
     }
+
 }

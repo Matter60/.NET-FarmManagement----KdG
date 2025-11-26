@@ -89,6 +89,7 @@ public class Manager : IManager
             Count = count
         };
         
+        ValidateEntity(farmAnimal);
         
         _repository.CreateFarmAnimal(farmAnimal);
     }
@@ -98,9 +99,9 @@ public class Manager : IManager
         return _repository.ReadAnimalsOfFarm(farmId);    
     }
 
-    public FarmAnimal GetFarmAnimal(int farmId, int animalId)
+    public bool GetFarmAnimalExists(int farmId, int animalId)
     {
-       return _repository.ReadFarmAnimal(farmId, animalId);
+       return _repository.ReadFarmAnimalExists(farmId, animalId);
     }
 
     private void ValidateEntity(object entity)

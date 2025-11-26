@@ -21,6 +21,6 @@ public interface IRepository
     public void DeleteFarmAnimal(int farmId, int animalId);
     
     public IEnumerable<Animal> ReadAnimalsOfFarm(int farmId);
-    
-    public FarmAnimal ReadFarmAnimal(int farmId, int animalId);
+
+    public bool ReadFarmAnimalExists(int farmId, int animalId);
 }

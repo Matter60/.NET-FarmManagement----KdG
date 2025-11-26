@@ -69,7 +69,7 @@ public class ConsoleUI
     private void AddAnimalToFarm()
     {
         var allFarms = _mgr.GetAllFarms();
-        var allAnimals = _mgr.GetAllAnimals();
+       
         Console.WriteLine("Which farm would you like to add an animal to?");
         foreach (Farm farm in allFarms)
         {
@@ -86,7 +86,7 @@ public class ConsoleUI
         }
 
         Console.WriteLine();
-        
+        var allAnimals = _mgr.GetAllAnimals();
         Console.WriteLine("Which animal would you like to add?");
         foreach (Animal animal in allAnimals)
         {
@@ -104,16 +104,20 @@ public class ConsoleUI
             return;
         }
         
-        var existingRel = _mgr.GetFarmAnimal(farmId, animalId);
+        var existingRel = _mgr.GetFarmAnimalExists(farmId, animalId);
 
-        if (existingRel != null)
+        if (existingRel)  // <- check op true, niet null
         {
             Console.WriteLine("This Animal has already been added to this Farm");
             Console.WriteLine();
             return;
         }
+
         
         _mgr.AddFarmAnimal(farmId, animalId);
+
+        Console.WriteLine("Animal successfully added to Farm");
+        Console.WriteLine();
     }
 
     private void RemoveAnimalFromFarm()
@@ -156,6 +160,9 @@ public class ConsoleUI
         }
         
         _mgr.RemoveFarmAnimal(farmId, animalId);
+
+        Console.WriteLine("Animal successfully removed from farm");
+        Console.WriteLine();
     }
 
     private void ShowAllFarms()

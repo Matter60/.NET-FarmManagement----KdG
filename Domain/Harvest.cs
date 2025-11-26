@@ -14,8 +14,8 @@ public class Harvest
 
     public double Quantity { get; set; }
     
-    public int FarmId { get; set; }
-    
+   
+    [Required]
     public Farm Farm { get; set; }
 
     public Harvest()
