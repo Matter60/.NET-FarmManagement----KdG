@@ -18,12 +18,19 @@ public class FarmManagementDbContext : DbContext
     public FarmManagementDbContext(DbContextOptions options)
         :base(options)
     {
-       
+        
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
+
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlite(@"Data Source=..\..\..\..\FarmManagementDb.sqlite");
+        }
+        
+        
 
         optionsBuilder.LogTo(msg => Debug.WriteLine(msg), LogLevel.Information);
     }
