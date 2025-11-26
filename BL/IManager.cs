@@ -22,5 +22,5 @@ public interface IManager
     
     public IEnumerable<Animal> GetAnimalsOfFarm(int farmId);
     
-    public bool GetFarmAnimalExists(int farmId, int animalId);
+    public FarmAnimal GetFarmAnimal(int farmId, int animalId);
 }

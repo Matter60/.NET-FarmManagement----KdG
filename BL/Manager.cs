@@ -99,9 +99,9 @@ public class Manager : IManager
         return _repository.ReadAnimalsOfFarm(farmId);    
     }
 
-    public bool GetFarmAnimalExists(int farmId, int animalId)
+    public FarmAnimal GetFarmAnimal(int farmId, int animalId)
     {
-       return _repository.ReadFarmAnimalExists(farmId, animalId);
+       return _repository.ReadFarmAnimal(farmId, animalId);
     }
 
     private void ValidateEntity(object entity)

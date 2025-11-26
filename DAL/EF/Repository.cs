@@ -103,9 +103,9 @@ public class Repository : IRepository
             .ToList();
     }
 
-    public bool ReadFarmAnimalExists(int farmId, int animalId)
+    public FarmAnimal ReadFarmAnimal(int farmId, int animalId)
     {
-        return _ctx.FarmAnimals.Any(fa => fa.Farm.Id == farmId && fa.Animal.Id == animalId);
+        return _ctx.FarmAnimals.Find(farmId, animalId);
     }
 
 }

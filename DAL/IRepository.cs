@@ -22,5 +22,5 @@ public interface IRepository
     
     public IEnumerable<Animal> ReadAnimalsOfFarm(int farmId);
 
-    public bool ReadFarmAnimalExists(int farmId, int animalId);
+    public FarmAnimal ReadFarmAnimal(int farmId, int animalId);
 }

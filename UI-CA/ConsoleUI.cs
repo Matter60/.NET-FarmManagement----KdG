@@ -103,21 +103,56 @@ public class ConsoleUI
             Console.WriteLine();
             return;
         }
-        
-        var existingRel = _mgr.GetFarmAnimalExists(farmId, animalId);
 
-        if (existingRel)  // <- check op true, niet null
+
+        Console.Write("Amount of animals would you like to add (default 1)? ");
+        string input = Console.ReadLine();
+
+        int amount;
+        
+        if (string.IsNullOrWhiteSpace(input))
+        {
+            amount = 1;
+        }
+        else if (!int.TryParse(input, out amount))
+        {
+            Console.WriteLine("Please enter a valid amount.");
+            Console.WriteLine();
+            return;
+        }
+        
+        var existingRel = _mgr.GetFarmAnimal(farmId, animalId);
+
+        if (existingRel != null) 
         {
             Console.WriteLine("This Animal has already been added to this Farm");
             Console.WriteLine();
             return;
         }
+        
+        
+        
 
         
-        _mgr.AddFarmAnimal(farmId, animalId);
+        try
+        {
+            _mgr.AddFarmAnimal(farmId, animalId, amount);
+            Console.WriteLine("Animal successfully added to Farm");
+            Console.WriteLine();
+        }
+        catch (ValidationException exception)
+        {
+            string[] errorMessages = exception.Message.Split("|");
 
-        Console.WriteLine("Animal successfully added to Farm");
-        Console.WriteLine();
+            foreach (string errorMessage in errorMessages)
+            {
+                Console.WriteLine($"Error: {errorMessage}");
+            }
+
+            Console.WriteLine("Please try again...");
+            Console.WriteLine();
+        }
+
     }
 
     private void RemoveAnimalFromFarm()

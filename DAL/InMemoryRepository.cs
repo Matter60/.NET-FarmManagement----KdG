@@ -110,7 +110,7 @@ public class InMemoryRepository : IRepository
         throw new NotImplementedException();
     }
 
-    public bool ReadFarmAnimalExists(int farmId, int animalId)
+    public FarmAnimal ReadFarmAnimal(int farmId, int animalId)
     {
         throw new NotImplementedException();
     }
