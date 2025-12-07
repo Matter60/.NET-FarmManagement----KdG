@@ -33,19 +33,22 @@
 
 <h2 class="mt-3">Animals</h2>
 <div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Count</th>
-            <th>Type</th>
-            <th>Species</th>
-            <th>Lifespan</th>
-            <th>Average weight</th>
-        </tr>
-        </thead>
-        <tbody class="table-group-divider">
-        @if (Model.FarmAnimals != null && Model.FarmAnimals.Any())
-        {
+    @if (Model.FarmAnimals == null || !Model.FarmAnimals.Any())
+    {
+        <p>This Farm has no animals</p>
+    } else {
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Count</th>
+                <th>Type</th>
+                <th>Species</th>
+                <th>Lifespan</th>
+                <th>Average weight</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider">
+
             @foreach (var animalItem in Model.FarmAnimals)
             {
                 <tr>
@@ -57,16 +60,9 @@
                     <td><a asp-controller="Animal" asp-action="Details" asp-route-animalId="@animalItem.Animal.Id">Details</a></td>
                 </tr>
             }
-        }
-        else
-        {
-            <tr>
-                <td colspan="6" class="text-center text-muted">
-                   No animals found on this farm 
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>
+           
+            </tbody>
+        </table>
+    }
 </div>
 

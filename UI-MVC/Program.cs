@@ -1,3 +1,4 @@
+using AspNetCoreLiveMonitoring.Extensions;
 using FarmManagement.BL;
 using FarmManagement.DAL;
 using FarmManagement.DAL.EF;
@@ -16,7 +17,9 @@ builder.Services.AddDbContext<FarmManagementDbContext>(optionsBuilder =>
 builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<IManager, Manager>();
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+builder.Services.AddLiveMonitoring();
 
 var app = builder.Build();
 
@@ -41,6 +44,8 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseAndMapLiveMonitoring();
 
 app.UseHttpsRedirection();
 app.UseRouting();
