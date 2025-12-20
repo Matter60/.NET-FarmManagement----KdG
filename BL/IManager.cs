@@ -25,4 +25,8 @@ public interface IManager
     public FarmAnimal GetFarmAnimal(int farmId, int animalId);
 
     public Farm GetFarmWithAnimals(int farmId);
+    
+    public IEnumerable<Harvest> GetAllHarvests();
+    
+    public Harvest AddHarvest(CropType cropType, DateOnly harvestDate, double quantity, Farm? farm);
 }

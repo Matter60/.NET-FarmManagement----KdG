@@ -25,4 +25,8 @@ public interface IRepository
     public FarmAnimal ReadFarmAnimal(int farmId, int animalId);
     
     public Farm ReadFarmWithAnimals(int farmId);
+    
+    public IEnumerable<Harvest> ReadAllHarvests();
+    
+    public void CreateHarvest(Harvest harvest);
 }

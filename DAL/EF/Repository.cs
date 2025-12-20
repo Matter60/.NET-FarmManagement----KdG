@@ -116,4 +116,14 @@ public class Repository : IRepository
             .SingleOrDefault(f => f.Id == farmId);
     }
 
+    public IEnumerable<Harvest> ReadAllHarvests()
+    {
+        return _ctx.Harvests.ToList();
+    }
+
+    public void CreateHarvest(Harvest harvest)
+    {
+        _ctx.Harvests.Add(harvest);
+        _ctx.SaveChanges();
+    }
 }

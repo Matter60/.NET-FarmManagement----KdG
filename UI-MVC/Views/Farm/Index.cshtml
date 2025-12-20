@@ -23,7 +23,7 @@
                     <td>@farm.Location</td>
                     <td>@(farm.SizeInHectares.HasValue ? $"{farm.SizeInHectares}": "Unknown" )</td>
                     <td>@farm.EstablishedYear</td>
-                    <td><a asp-controller="Farm" asp-action="Details" asp-route-farmId="@farm.Id">Details</a></td>
+                    <td><a asp-controller="Farm" asp-action="Details" asp-route-id="@farm.Id">Details</a></td>
                </tr>
           }
           </tbody>

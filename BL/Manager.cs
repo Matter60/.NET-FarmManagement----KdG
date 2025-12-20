@@ -109,6 +109,19 @@ public class Manager : IManager
         return _repository.ReadFarmWithAnimals(farmId);
     }
 
+    public IEnumerable<Harvest> GetAllHarvests()
+    {
+        return _repository.ReadAllHarvests();
+    }
+
+    public Harvest AddHarvest(CropType cropType, DateOnly harvestDate, double quantity, Farm farm)
+    { 
+        var harvestToCreate = new Harvest(cropType, harvestDate, quantity, farm);
+        ValidateEntity(harvestToCreate);
+        _repository.CreateHarvest(harvestToCreate);
+        return harvestToCreate;
+    }
+
     private void ValidateEntity(object entity)
     {
         List<ValidationResult> errors = new List<ValidationResult>();

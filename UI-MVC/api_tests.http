@@ -1,0 +1,13 @@
+﻿### ophalen van alle harvests
+GET https://localhost:7214/api/Harvests
+Accept: application/json
+
+### Voeg een harvest toe 
+POST https://localhost:7214/api/Harvests
+Content-Type: application/json
+
+{
+  "cropType": "Corn",
+  "quantity": 500.10,
+  "harvestDate": "2025-09-01"
+}

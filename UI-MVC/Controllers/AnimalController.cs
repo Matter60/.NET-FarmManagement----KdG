@@ -13,9 +13,9 @@ public class AnimalController : Controller
     }
     
     [HttpGet]
-    public IActionResult Details(int animalId)
+    public IActionResult Details(int id)
     {
-        var animal = _manager.GetAnimal(animalId);
+        var animal = _manager.GetAnimal(id);
         return View(animal);
     }
 }

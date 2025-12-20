@@ -61,12 +61,11 @@ public class FarmManagementDbContext : DbContext
             .WithMany(a => a.FarmAnimals)
             .HasForeignKey("FkAnimalId")
             .IsRequired();
-        
+
         modelBuilder.Entity<Harvest>()
             .HasOne(f => f.Farm)
             .WithMany(h => h.Harvests)
-            .HasForeignKey("FkFarmId")
-            .IsRequired();
+            .HasForeignKey("FkFarmId");
         
         modelBuilder.Entity<FarmAnimal>().HasKey("FkFarmId","FkAnimalId");
 

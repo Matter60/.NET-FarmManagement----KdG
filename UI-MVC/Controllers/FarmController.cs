@@ -23,9 +23,9 @@ public class FarmController : Controller
     
     
     [HttpGet]
-    public IActionResult Details(int farmId)
+    public IActionResult Details(int id)
     {
-        var farm = _manager.GetFarmWithAnimals(farmId);
+        var farm = _manager.GetFarmWithAnimals(id);
         return View(farm);
     }
     
@@ -44,7 +44,7 @@ public class FarmController : Controller
         
         var addedFarm = _manager.AddFarm(newFarm.Name,newFarm.Location, newFarm.EstablishedYear,newFarm.SizeInHectares);
 
-        return RedirectToAction("Details", new {farmId = addedFarm.Id});
+        return RedirectToAction("Details", new {id = addedFarm.Id});
     }
     
     

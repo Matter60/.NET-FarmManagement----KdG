@@ -119,4 +119,14 @@ public class InMemoryRepository : IRepository
     {
         throw new NotImplementedException();
     }
+
+    public IEnumerable<Harvest> ReadAllHarvests()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void CreateHarvest(Harvest harvest)
+    {
+        throw new NotImplementedException();
+    }
 }

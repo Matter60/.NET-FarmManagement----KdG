@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using AspNetCoreLiveMonitoring.Extensions;
 using FarmManagement.BL;
 using FarmManagement.DAL;
@@ -17,7 +18,12 @@ builder.Services.AddDbContext<FarmManagementDbContext>(optionsBuilder =>
 builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<IManager, Manager>();
 
-builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 
 builder.Services.AddLiveMonitoring();
 

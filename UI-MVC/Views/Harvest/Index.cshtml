@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "List of Harvests";
+   
+}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Crop</th>
+        <th>Quantity</th>
+        <th>Harvest Date</th>
+    </tr>
+    </thead>
+    <tbody id="harvestTableBody" class="table-group-divider">
+    <tr>
+        <td colspan="3">Even geduld, data wordt geladen...</td>
+    </tr>
+    </tbody>
+</table>
+
+<button id="btnRefresh" class="btn btn-primary mb-3">Refresh</button>
+
+
+@section Scripts {
+    <script defer src="/js/harvest/index.js"></script>
+}
