@@ -34,7 +34,7 @@ function getHarvests() {
         })
         .catch(err => {
             console.error(err);
-            alert("Er heeft zich een onverwachte fout voorgedaan.");
+            alert("Unexpected error occurred.");
         });
 }
 

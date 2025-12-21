@@ -3,7 +3,7 @@ using FarmManagement.BL.Domain;
 
 namespace FarmManagement.UI.Web.Models.Dto;
 
-public class newFarmAnimalDto
+public class NewFarmAnimalDto
 {
     [Required]
     public int FarmId { get; set; }

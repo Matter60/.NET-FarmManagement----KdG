@@ -6,17 +6,17 @@ namespace FarmManagement.UI.Web.Controllers.Api;
 
 [ApiController]
 [Route("api/[controller]")]
-public class FarmsController : ControllerBase
+public class AnimalsController : ControllerBase
 {
     private readonly IManager _manager;
 
-    public FarmsController(IManager manager)
+    public AnimalsController(IManager manager)
     {
         _manager = manager;
     }
 
 
-    [Route("GetFarmsOfAnimal/{animalId}")]
+    [Route("{animalId}/farms")]
     [HttpGet]
     public IActionResult GetFarmsOfAnimal(int animalId)
     {
@@ -24,7 +24,7 @@ public class FarmsController : ControllerBase
         return Ok(farms);
     }
 
-    [Route("GetAvailableFarmsOfAnimal/{animalId}")]
+    [Route("{animalId}/farms-candidates")]
     [HttpGet]
 
     public IActionResult GetAvailableFarmsOfAnimal(int animalId)
@@ -33,13 +33,5 @@ public class FarmsController : ControllerBase
         
         return Ok(farms);
     }
-
-    [Route("CreateFarmAnimal")]
-    [HttpPost]
-
-    public IActionResult Post(newFarmAnimalDto newFarmAnimal)
-    {
-        var farmAnimal = _manager.AddFarmAnimal(newFarmAnimal.FarmId, newFarmAnimal.AnimalId, newFarmAnimal.Count);
-        return Ok();
-    }
+    
 }

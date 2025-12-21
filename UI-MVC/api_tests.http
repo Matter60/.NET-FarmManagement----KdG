@@ -13,16 +13,16 @@ Content-Type: application/json
 }
 
 ### ophalen van farms op basis van animal id
-GET https://localhost:7214/api/Farms/GetFarmsOfAnimal/2
+GET https://localhost:7214/api/Animals/1/farms
 Content-Type: application/json
 
 
 ### ophalen van farms die niet gelinked zijn met de animal
-GET https://localhost:7214/api/Farms/GetAvailableFarmsOfAnimal/1
+GET https://localhost:7214/api/Animals/1/farms-candidates
 Content-Type: application/json
 
 ### legen van de relatie tussen farm en een animal
-POST https://localhost:7214/api/Farms/CreateFarmAnimal
+POST https://localhost:7214/api/FarmAnimals
 Content-Type: application/json
 
 {
@@ -30,3 +30,4 @@ Content-Type: application/json
   "farmId": 1,
   "count": 10
 }
+

@@ -13,7 +13,7 @@ function loadContent() {
 
 
 function getLinkedFarms(animalId) {
-    fetch(`/api/Farms/GetFarmsOfAnimal/${animalId}`, {
+    fetch(`/api/Animals/${animalId}/farms`, {
         method: 'GET',
         headers: { 'Accept': 'application/json' }
     })
@@ -28,7 +28,7 @@ function getLinkedFarms(animalId) {
             updateLinkedFarmsTable(data);
         })
         .catch(error => {
-            alert("Er heeft zich een onverwachte fout voorgedaan.");
+            alert("Unexpected error occurred.");
         });
 }
 
@@ -39,7 +39,6 @@ function updateLinkedFarmsTable(farms) {
 
     if (farms.length === 0) {
         tableBody.innerHTML = '<tr><td colspan="5">Nog geen boerderijen gekoppeld.</td></tr>';
-        return;
     }
 
     for (const farm of farms) {
@@ -57,7 +56,7 @@ function updateLinkedFarmsTable(farms) {
 
 
 function getAvailableFarms(animalId) {
-    fetch(`/api/Farms/GetAvailableFarmsOfAnimal/${animalId}`, {
+    fetch(`/api/Animals/${animalId}/farms-candidates`, {
         method: 'GET',
         headers: { 'Accept': 'application/json' }
     })
@@ -73,7 +72,7 @@ function getAvailableFarms(animalId) {
             updateAvailableFarmsDropdown(data);
         })
         .catch(error => {
-            alert("Er heeft zich een onverwachte fout voorgedaan.");
+            alert("Unexpected error occurred.");
         });
 }
 
@@ -81,7 +80,7 @@ function getAvailableFarms(animalId) {
 function updateAvailableFarmsDropdown(farmList) {
     const selectBox = document.getElementById("farmSelect");
     
-    selectBox.innerHTML = '<option value="" disabled selected>Select a farm...</option>';
+    selectBox.innerHTML = '<option value="" disabled selected> --- Select a farm --- </option>';
 
     if (farmList.length === 0) {
         selectBox.insertAdjacentHTML('beforeend',
@@ -94,8 +93,7 @@ function updateAvailableFarmsDropdown(farmList) {
     }
 }
 
-function addFarmToAnimal(event) {
-    event.preventDefault();
+function addFarmToAnimal() {
     
     
     const animalIdInput = document.getElementById("currentAnimalId");
@@ -104,11 +102,9 @@ function addFarmToAnimal(event) {
     
     if (!farmSelect.value) {
         alert("Selecteer eerst een boerderij!");
-        return;
     }
     if (!countInput.value || parseInt(countInput.value) < 1) {
         alert("Het aantal moet minimaal 1 zijn!");
-        return; 
     }
     
     const newFarmAnimal = {
@@ -118,7 +114,7 @@ function addFarmToAnimal(event) {
     };
 
    
-    fetch('/api/Farms/CreateFarmAnimal', {
+    fetch('/api/FarmAnimals', {
         method: 'POST',
         body: JSON.stringify(newFarmAnimal),
         headers: {
@@ -128,7 +124,7 @@ function addFarmToAnimal(event) {
        
     })
         .then(res => {
-            if (res.status === 201) {
+            if (res.ok) {
                 farmSelect.value = ""; 
                 countInput.value = 1;  
                 
