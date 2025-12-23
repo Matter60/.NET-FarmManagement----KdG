@@ -139,4 +139,9 @@ public class InMemoryRepository : IRepository
     {
         throw new NotImplementedException();
     }
+
+    public Harvest ReadHarvest(int id)
+    {
+        throw new NotImplementedException();
+    }
 }

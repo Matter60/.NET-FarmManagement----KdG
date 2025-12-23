@@ -33,4 +33,6 @@ public interface IRepository
     public IEnumerable<Farm> ReadFarmsOfAnimal(int animalId);
 
     public IEnumerable<Farm> ReadAvailableFarmsOfAnimal(int animalId);
+    
+    public Harvest ReadHarvest(int id);
 }

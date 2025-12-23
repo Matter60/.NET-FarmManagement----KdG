@@ -140,4 +140,9 @@ public class Repository : IRepository
             .Where(f => !f.FarmAnimals.Any(fa => fa.Animal.Id == animalId))
             .ToList();
     }
+
+    public Harvest ReadHarvest(int id)
+    {
+        return _ctx.Harvests.Find(id);
+    }
 }

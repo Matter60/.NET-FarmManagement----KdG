@@ -12,6 +12,10 @@ Content-Type: application/json
   "harvestDate": "2025-09-01"
 }
 
+### ophalen van 1 harvest
+GET https://localhost:7214/api/Harvests/1
+Content-Type: application/json
+
 ### ophalen van farms op basis van animal id
 GET https://localhost:7214/api/Animals/1/farms
 Content-Type: application/json

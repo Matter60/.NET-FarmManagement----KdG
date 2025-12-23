@@ -16,6 +16,19 @@ public class HarvestsController : ControllerBase
         _manager = manager;
     }
 
+    [Route("{id}")]
+    [HttpGet]
+
+    public IActionResult GetHarvest(int id)
+    {
+        var harvest = _manager.GetHarvest(id);
+        if (harvest == null)
+            return NotFound();
+        
+        return Ok(harvest);
+    }
+    
+
     [HttpGet]
     public IActionResult GetAllHarvests()
     {
@@ -39,6 +52,6 @@ public class HarvestsController : ControllerBase
         );
 
       
-        return CreatedAtAction(nameof(GetAllHarvests), new { id = createdHarvest.Id }, createdHarvest);
+        return CreatedAtAction("GetHarvest", new { id = createdHarvest.Id }, createdHarvest);
     }
 }

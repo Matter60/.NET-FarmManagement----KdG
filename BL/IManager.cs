@@ -33,4 +33,6 @@ public interface IManager
     public IEnumerable<Farm> GetFarmsOfAnimal(int animalId);
 
     public IEnumerable<Farm> GetAvailableFarmsOfAnimal(int animalId);
+
+    public Harvest GetHarvest(int id);
 }

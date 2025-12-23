@@ -21,6 +21,9 @@ public class AnimalsController : ControllerBase
     public IActionResult GetFarmsOfAnimal(int animalId)
     {
         var farms = _manager.GetFarmsOfAnimal(animalId);
+        if (!(farms?.Any() ?? false))
+            return NoContent();
+        
         return Ok(farms);
     }
 
@@ -30,6 +33,8 @@ public class AnimalsController : ControllerBase
     public IActionResult GetAvailableFarmsOfAnimal(int animalId)
     {
         var farms = _manager.GetAvailableFarmsOfAnimal(animalId);
+        if (!(farms?.Any() ?? false))
+            return NoContent();
         
         return Ok(farms);
     }
