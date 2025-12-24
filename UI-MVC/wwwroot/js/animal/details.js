@@ -88,8 +88,12 @@ function updateAvailableFarmsDropdown(farmList) {
  
     
     if (farmList.length === 0) {
-        selectBox.insertAdjacentHTML('beforeend',
-            '<option disabled>Geen boerderijen meer beschikbaar</option>');
+        selectBox.innerHTML = '<option value="" disabled selected>Geen boerderijen meer beschikbaar</option>'
+        const btn = document.getElementById("btn-submit")
+        const countInput = document.getElementById("countInput");
+        selectBox.disabled = true;
+        countInput.disabled = true;
+        btn.disabled = true;
     } else {
         farmList.forEach(farm => {
             const optionHtml = `<option value="${farm.id}">${farm.name}</option>`;
@@ -108,9 +112,11 @@ function addFarmToAnimal(event) {
 
     if (!farmSelect.value) {
         alert("Selecteer eerst een boerderij!");
+        return;
     }
     if (!countInput.value || parseInt(countInput.value) < 1) {
         alert("Het aantal moet minimaal 1 zijn!");
+        return;
     }
 
     const newFarmAnimal = {

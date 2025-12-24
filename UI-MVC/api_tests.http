@@ -36,13 +36,4 @@ Content-Type: application/json
   "count": 10
 }
 
-### legen van de relatie tussen farm en een animal
-POST https://localhost:7214/api/FarmAnimals
-Content-Type: application/json
-
-{
-  "animalId": 13,
-  "farmId": 2,
-  "count": 10
-}
 
