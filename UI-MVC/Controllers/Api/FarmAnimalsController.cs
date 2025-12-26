@@ -21,8 +21,15 @@ public class FarmAnimalsController : ControllerBase
         var farmAnimal = _manager.GetFarmAnimal(farmId, animalId);
         if (farmAnimal == null)
             return NotFound();
+        
+        var dto = new FarmAnimalDto
+        {
+            FarmId = farmId,
+            AnimalId = animalId,
+            Count = farmAnimal.Count
+        };
 
-        return Ok(farmAnimal);
+        return Ok(dto);
             
     }
     
@@ -43,8 +50,8 @@ public class FarmAnimalsController : ControllerBase
             "GetFarmAnimal",
             new
             {
-                farmId = newFarmAnimal.FarmId,
-                animalId = newFarmAnimal.AnimalId
+                farmId = farmAnimal.Farm.Id,
+                animalId = farmAnimal.Animal.Id
             },
             dto
         );

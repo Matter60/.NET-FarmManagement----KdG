@@ -17,7 +17,7 @@ public static class FarmExtensions
         }
         else
         {
-            info += "\nNo harvests recored.";
+            info += "\nNo harvests recorded.";
         }
 
         return info;
