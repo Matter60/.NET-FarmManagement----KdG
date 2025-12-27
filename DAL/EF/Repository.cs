@@ -137,7 +137,7 @@ public class Repository : IRepository
     public IEnumerable<Farm> ReadAvailableFarmsOfAnimal(int animalId)
     {
         return _ctx.Farms
-            .Where(f => !f.FarmAnimals.Any(fa => fa.Animal.Id == animalId))
+            .Where(f => f.FarmAnimals.All(fa => fa.Animal.Id != animalId))
             .ToList();
     }
 

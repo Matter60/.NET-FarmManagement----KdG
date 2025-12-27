@@ -77,7 +77,7 @@ public class Manager : IManager
 
   
 
-    public FarmAnimal AddFarmAnimal(int farmId, int animalId, int count = 1)
+    public FarmAnimal AddFarmAnimal(int farmId, int animalId, int count)
     {
         var farm = _repository.ReadFarm(farmId);
         

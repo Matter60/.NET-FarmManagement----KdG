@@ -5,10 +5,10 @@ using FarmManagement.UI.CA.Extensions;
 
 namespace FarmManagement.UI.CA;
 
-public class ConsoleUI
+public class ConsoleUi
 {
     private readonly IManager _mgr;
-    public ConsoleUI(IManager manager)
+    public ConsoleUi(IManager manager)
     {
         _mgr = manager;
     }

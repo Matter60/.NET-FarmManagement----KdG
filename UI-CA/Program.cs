@@ -6,12 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 string connectionString = @"Data Source=..\..\..\..\FarmManagementDb.sqlite";
 
-//DummyDataSeeder seeder = new DummyDataSeeder();
-//seeder.Seed();
 
 bool executeDropDatabase = true;
 
-//IRepository repository = new InMemoryRepository();
 DbContextOptionsBuilder optionsBuilder = new DbContextOptionsBuilder();
 optionsBuilder.UseSqlite(connectionString);
 FarmManagementDbContext farmManagementDbContext = new FarmManagementDbContext(optionsBuilder.Options);
@@ -24,5 +21,5 @@ if (isDbCreated)
 IRepository repository = new Repository(farmManagementDbContext);
 
 IManager manager = new Manager(repository);
-ConsoleUI consoleUi = new ConsoleUI(manager);
+ConsoleUi consoleUi = new ConsoleUi(manager);
 consoleUi.Run();    

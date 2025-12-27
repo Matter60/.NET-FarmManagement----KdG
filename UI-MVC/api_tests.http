@@ -1,8 +1,12 @@
-﻿### ophalen van alle harvests
+﻿### Ophalen van alle harvests
 GET https://localhost:7214/api/Harvests
 Accept: application/json
 
-### Voeg een harvest toe 
+### Ophalen van 1 specifieke harvest
+GET https://localhost:7214/api/Harvests/1
+Accept: application/json
+
+### Voeg een nieuwe harvest toe
 POST https://localhost:7214/api/Harvests
 Content-Type: application/json
 
@@ -12,21 +16,31 @@ Content-Type: application/json
   "harvestDate": "2025-09-01"
 }
 
+### Ophalen van onbestaande harvest 
+GET https://localhost:7214/api/Harvests/9999
+Accept: application/json
 
-### ophalen van 1 harvest
-GET https://localhost:7214/api/Harvests/1
-Content-Type: application/json
 
-### ophalen van farms op basis van animal id
+
+### Ophalen van farms waar een specifiek dier zit
 GET https://localhost:7214/api/Animals/1/farms
-Content-Type: application/json
+Accept: application/json
 
-
-### ophalen van farms die niet gelinked zijn met de animal
+### Ophalen van kandidaat-farms waar dier nog NIET zit
 GET https://localhost:7214/api/Animals/1/farms-candidates
-Content-Type: application/json
+Accept: application/json
 
-### legen van de relatie tussen farm en een animal
+### Farms ophalen voor onbestaand dier 
+GET https://localhost:7214/api/Animals/9999/farms
+Accept: application/json
+
+
+
+### Ophalen van de relatie tussen farm 1 en dier 1
+GET https://localhost:7214/api/FarmAnimals/1/1
+Accept: application/json
+
+### Een dier toevoegen aan een farm
 POST https://localhost:7214/api/FarmAnimals
 Content-Type: application/json
 
@@ -36,4 +50,16 @@ Content-Type: application/json
   "count": 10
 }
 
+### Ophalen van onbestaande relatie 
+GET https://localhost:7214/api/FarmAnimals/999/888
+Accept: application/json
 
+### GEFAALD: POST met ongeldige data
+POST https://localhost:7214/api/FarmAnimals
+Content-Type: application/json
+
+{
+  "animalId": 13,
+  "farmId": 1,
+  "count": "FoutieveTekst"
+}
