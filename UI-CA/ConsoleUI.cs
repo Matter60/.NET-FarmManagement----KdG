@@ -218,6 +218,13 @@ public class ConsoleUI
         Console.Write("Enter location: ");
         string location = Console.ReadLine();
 
+        if (int.TryParse(location, out int resAsNumber))
+        {
+            Console.WriteLine("Enter a valid location, Not a number.");
+            Console.WriteLine();
+            return;
+        }
+
         IEnumerable<Farm> filtered = _mgr.GetFarmsByLocation(location);
 
         if (!filtered.Any())
