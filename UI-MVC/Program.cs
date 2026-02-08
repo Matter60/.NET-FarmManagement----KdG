@@ -27,6 +27,8 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation()
 
 builder.Services.AddLiveMonitoring();
 
+builder.Services.AddAuthentication().AddCookie();
+
 var app = builder.Build();
 
 
@@ -54,6 +56,7 @@ app.UseAndMapLiveMonitoring();
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
