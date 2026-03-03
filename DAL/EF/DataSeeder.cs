@@ -9,11 +9,12 @@ public static class DataSeeder
         var userLars = farmManagementDbContext.Users.Single(u => u.Email == "lars@kdg.be");
         var userAnna = farmManagementDbContext.Users.Single(u => u.Email == "anna@kdg.be");
         var userBob = farmManagementDbContext.Users.Single(u => u.Email == "bob@kdg.be");
+        var userChef = farmManagementDbContext.Users.Single(u => u.Email == "chef@kdg.be");
         // Farms
         Farm sunnyMeadowFarm = new Farm("Sunny Meadow Farm", "Netherlands", 1995, userLars, 50);
         Farm greenValleyEstate = new Farm("Green Valley Estate", "Belgium", 2000, userAnna, 74.2);
         Farm oldOakHomestead = new Farm("Old Oak Homestead", "Germany", 1980, userBob);
-        Farm riverbendFarmstead = new Farm("Riverbend Farmstead", "Netherlands", 2010, userLars, 60);
+        Farm riverbendFarmstead = new Farm("Riverbend Farmstead", "Netherlands", 2010, userChef, 60);
 
 
         // Adding to list

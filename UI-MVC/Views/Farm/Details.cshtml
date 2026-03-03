@@ -18,7 +18,7 @@
             <td>&nbsp;</td>
             <td>@Model.Location</td>
         </tr>
-        @if (User.Identity.IsAuthenticated && User.Identity.Name == Model.Maintainer.UserName)
+        @if ((User.Identity.IsAuthenticated && User.Identity.Name == Model.Maintainer.UserName) || User.IsInRole("Admin"))
         {
             <tr>
                 <th>Size in Hectares</th>

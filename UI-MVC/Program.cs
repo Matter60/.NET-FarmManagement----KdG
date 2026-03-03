@@ -32,10 +32,11 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     {
         
     })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<FarmManagementDbContext>();
-
 builder.Services.Configure<IdentityOptions>(options =>
 {
+    
 });
 
 // Fix api: authorization status codes
@@ -75,7 +76,10 @@ using (var scope = app.Services.CreateScope())
     if (isDbCreated)
     {
         var userManager = scope.ServiceProvider.GetService<UserManager<IdentityUser>>();
-        IdentitySeeder identitySeeder = new IdentitySeeder(userManager);
+        
+        var roleManager = scope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
+        
+        IdentitySeeder identitySeeder = new IdentitySeeder(userManager, roleManager);
         identitySeeder.Seed();
         
         

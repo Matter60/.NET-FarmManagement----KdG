@@ -22,9 +22,11 @@ public class FarmController : ControllerBase
       
         var farmToUpdate = _manager.GetFarmWithMaintainer(id);
         if (farmToUpdate == null) return NotFound();
-
         
-        if (farmToUpdate.Maintainer.UserName != User.Identity?.Name)
+        bool isAdmin = User.IsInRole("Admin");
+        bool isOwner = farmToUpdate.Maintainer.UserName == User.Identity?.Name;
+
+        if (!isAdmin && !isOwner)
         {
             return Forbid(); // 403 Forbidden
         }
