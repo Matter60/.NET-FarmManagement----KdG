@@ -11,6 +11,8 @@ function updateSize() {
         .then(res => {
            if(res.ok) {
                alert("Successfully updated size");
+           } else {
+               alert(`Server status: ${res.status}`);
            }
            
         })
