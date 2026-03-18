@@ -119,7 +119,7 @@ tests:
       junit: Tests/TestResults/TestResults.xml
       coverage_report: 
         coverage_format: cobertura
-      path: Tests/TestResults/*/coverage.cobertura.xml
+        path: Tests/TestResults/*/coverage.cobertura.xml
     paths:
       - Tests/TestResults/CoverageReport
 
