@@ -11,6 +11,10 @@
 # dotenv files
 .env
 
+# tools
+tools/
+
+
 # User-specific files
 *.rsuser
 *.suo

@@ -30,13 +30,13 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation()
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     {
-        options.SignIn.RequireConfirmedAccount = false;
+        options.SignIn.RequireConfirmedEmail = false;
     })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<FarmManagementDbContext>();
 builder.Services.Configure<IdentityOptions>(options =>
 {
-    
+    options.Lockout.MaxFailedAccessAttempts = 3;
 });
 
 // Fix api: authorization status codes
@@ -112,3 +112,4 @@ app.MapControllerRoute(
 
 app.Run();
 
+public partial class Program {}

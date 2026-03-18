@@ -37,14 +37,12 @@ public class FarmController : Controller
         return View(farm);
     }
     
-    // wordt all geauthorized op class niveau
     public IActionResult Add()
     {
         return View();
     }
 
     [HttpPost]
-    // wordt all geauthorized op class niveau
     public IActionResult Add(NewFarmViewModel newFarm)
     {
         if (!ModelState.IsValid)
