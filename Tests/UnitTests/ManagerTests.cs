@@ -109,7 +109,6 @@ public class ManagerTests
 
         // Act
         var exception = Record.Exception(() => _mgr.ChangeFarm(invalidFarm));
-
         // Assert
         Assert.IsType<ValidationException>(exception);
         Assert.Contains("Established year cannot be in the future", exception.Message, StringComparison.OrdinalIgnoreCase);
