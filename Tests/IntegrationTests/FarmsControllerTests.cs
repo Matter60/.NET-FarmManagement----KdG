@@ -41,7 +41,7 @@ public class FarmsControllerTests : IClassFixture<ExtendedWebApplicationFactory<
         
 
         // Act
-        var response = client.PutAsJsonAsync($"/api/Farm/{farmId}", new UpdateFarmDto { SizeInHectares = 99 }).Result;
+        var response = client.PutAsJsonAsync($"/api/Farms/{farmId}", new UpdateFarmDto { SizeInHectares = 99 }).Result;
 
         // Assert
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
@@ -63,7 +63,7 @@ public class FarmsControllerTests : IClassFixture<ExtendedWebApplicationFactory<
         
 
         // Act
-        var response = client.PutAsJsonAsync($"/api/Farm/{farmId}", new UpdateFarmDto { SizeInHectares = 123.45 }).Result;
+        var response = client.PutAsJsonAsync($"/api/Farms/{farmId}", new UpdateFarmDto { SizeInHectares = 123.45 }).Result;
 
         // Assert
         Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
@@ -90,7 +90,7 @@ public class FarmsControllerTests : IClassFixture<ExtendedWebApplicationFactory<
         var newSize = originalSize  + 3.33;
 
         // Act
-        var response = client.PutAsJsonAsync($"/api/Farm/{farmId}", new UpdateFarmDto { SizeInHectares = newSize }).Result;
+        var response = client.PutAsJsonAsync($"/api/Farms/{farmId}", new UpdateFarmDto { SizeInHectares = newSize }).Result;
 
         // Assert
         Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
@@ -112,7 +112,7 @@ public class FarmsControllerTests : IClassFixture<ExtendedWebApplicationFactory<
         var invalidId = -1;
 
         // Act
-        var response = client.PutAsJsonAsync($"/api/Farm/{invalidId}", new UpdateFarmDto { SizeInHectares = 55.5 }).Result;
+        var response = client.PutAsJsonAsync($"/api/Farms/{invalidId}", new UpdateFarmDto { SizeInHectares = 55.5 }).Result;
 
         // Assert
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);

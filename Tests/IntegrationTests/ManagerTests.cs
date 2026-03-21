@@ -46,7 +46,7 @@ public class ManagerTests : IClassFixture<ExtendedWebApplicationFactory<Program>
         using var scope = _factory.Services.CreateScope();
         var mgr = scope.ServiceProvider.GetService<IManager>();
 
-        var species = "TestSpecies";
+        var species = "TestSpecies123445";
 
         // Act
         var animal = mgr.AddAnimal(species, lifespan: 7, averageWeight: 123.4, type: AnimalType.Goat);

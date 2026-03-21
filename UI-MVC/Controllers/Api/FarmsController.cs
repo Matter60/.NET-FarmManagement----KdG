@@ -8,10 +8,10 @@ namespace FarmManagement.UI.Web.Controllers.Api;
 [ApiController]
 [Route("api/[controller]")]
 [Authorize]
-public class FarmController : ControllerBase
+public class FarmsController : ControllerBase
 {
     private readonly IManager _manager;
-    public FarmController(IManager manager)
+    public FarmsController(IManager manager)
     {
         _manager = manager;
     }

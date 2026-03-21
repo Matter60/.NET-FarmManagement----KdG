@@ -12,13 +12,13 @@ using Moq;
 
 namespace FarmManagement.UI.MVC.Tests.UnitTests;
 
-public class FarmControllerTests
+public class FarmControllersTests
 {
     private readonly Mock<IManager> _mock;
     private readonly Mock<UserManager<IdentityUser>> _mockUserManager;
     private readonly FarmController _ctr;
 
-    public FarmControllerTests()
+    public FarmControllersTests()
     {
         _mock = new Mock<IManager>();
         _mockUserManager = GetMockUserManager<IdentityUser>();
@@ -103,6 +103,53 @@ public class FarmControllerTests
 
         /* mock-verification */
         _mock.VerifyAll();
+    }
+
+    #endregion
+
+    #region Details GET
+
+    [Fact]
+    public void Details_Get_ReturnsViewWithCorrectFarm_GivenExistingId()
+    {
+        // Arrange
+        var farmId = 1;
+        var farm = new Farm
+        {
+            Id = farmId, Name = "Sunny Farm", Location = "Belgium", EstablishedYear = 2000
+        };
+
+        _mock.Setup(mgr => mgr.GetFarmWithAnimalsAndMaintainer(farmId)).Returns(farm);
+
+        // Act
+        var result = _ctr.Details(farmId);
+
+        // Assert
+        Assert.IsType<ViewResult>(result);
+        var viewResult = (ViewResult)result;
+        Assert.Equal(farm, viewResult.Model);
+
+        /* mock-verification */
+        _mock.Verify(mgr => mgr.GetFarmWithAnimalsAndMaintainer(farmId), Times.Once);
+    }
+
+    [Fact]
+    public void Details_Get_ReturnsViewWithNullModel_GivenNonExistingId()
+    {
+        // Arrange
+        var nonExistingId = -1;
+        _mock.Setup(mgr => mgr.GetFarmWithAnimalsAndMaintainer(nonExistingId)).Returns((Farm)null);
+
+        // Act
+        var result = _ctr.Details(nonExistingId);
+
+        // Assert
+        Assert.IsType<ViewResult>(result);
+        var viewResult = (ViewResult)result;
+        Assert.Null(viewResult.Model);
+
+        /* mock-verification */
+        _mock.Verify(mgr => mgr.GetFarmWithAnimalsAndMaintainer(nonExistingId), Times.Once);
     }
 
     #endregion

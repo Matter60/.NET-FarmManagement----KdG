@@ -7,14 +7,14 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace FarmManagement.UI.MVC.Tests.IntegrationTests;
 
-public class FarmControllerTests : IClassFixture<ExtendedWebApplicationFactory<Program>>
+public class FarmControllersTests : IClassFixture<ExtendedWebApplicationFactory<Program>>
 {
     private readonly ExtendedWebApplicationFactory<Program> _factory;
 
     private const string AdminEmail = "lars@kdg.be";
     private const string AdminPassword = "Password1!";
 
-    public FarmControllerTests(ExtendedWebApplicationFactory<Program> factory)
+    public FarmControllersTests(ExtendedWebApplicationFactory<Program> factory)
     {
         _factory = factory;
     }

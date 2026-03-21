@@ -5,7 +5,7 @@ if (saveButton) {
 function updateSize() {
     const newSize = document.getElementById("inputSize").value;
     const farmId = document.getElementById("farmId").value;
-    fetch(`/api/Farm/${farmId}`, {
+    fetch(`/api/Farms/${farmId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({sizeInHectares: parseFloat(newSize)})
