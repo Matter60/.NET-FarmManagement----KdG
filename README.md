@@ -150,3 +150,33 @@ location: https://localhost:7214/api/Harvests/19
 }
 
 ```
+
+## Sprint 8
+
+````shell
+dotnet test
+````
+
+![Code coverage](FarmManagement_Code_Coverage.png)
+
+### FQN authorization
+
+- `Tests.IntegrationTests.FarmControllersTests.cs`
+
+
+### FQN verification
+
+
+- `Tests.UnitTests.FarmControllersTests.cs`
+- `Tests.UnitTests.ManagerTests.cs`
+
+
+### GitLab pipeline links
+
+
+- Tests-tabblad van een pipeline waarin alle tests aanwezig waren en slaagden:  
+  [Pipeline tests](https://gitlab.com/kdg-ti/programmeren-2-dotnet/25-26/isb204/projects/matthias.wuyts/-/pipelines/2399750799/test_report?job_name=tests)
+
+
+- Code coverage rapport van een pipeline waarin alle tests aanwezig waren en slaagden:  
+  [Code coverage rapport](https://kdg-ti.gitlab.io/-/programmeren-2-dotnet/25-26/isb204/projects/matthias.wuyts/-/jobs/13589814890/artifacts/Tests/TestResults/CoverageReport/index.html)
