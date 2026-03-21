@@ -39,6 +39,7 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Lockout.MaxFailedAccessAttempts = 3;
 });
 
+builder.Services.AddAuthorization();
 // Fix api: authorization status codes
 builder.Services.ConfigureApplicationCookie (cfg =>
 {
