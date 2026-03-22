@@ -51,6 +51,9 @@ public class ManagerTests
         var averageWeight = 600.0;
         var type = AnimalType.Cow;
 
+        _mock.Setup(repo => repo.CreateAnimal(It.IsAny<Animal>()))
+            .Verifiable(Times.Never);
+
         // Act
         var exception = Record.Exception(() => _mgr.AddAnimal(invalidSpecies, lifespan, averageWeight, type));
 
@@ -58,7 +61,7 @@ public class ManagerTests
         Assert.IsType<ValidationException>(exception);
 
         /* mock-verification */
-        _mock.Verify(repo => repo.CreateAnimal(It.IsAny<Animal>()), Times.Never);
+        _mock.VerifyAll();
     }
 
     #endregion
@@ -107,6 +110,9 @@ public class ManagerTests
             Maintainer = new IdentityUser { UserName = "testuser@kdg.be" }
         };
 
+        _mock.Setup(repo => repo.UpdateFarm(It.IsAny<Farm>()))
+            .Verifiable(Times.Never);
+
         // Act
         var exception = Record.Exception(() => _mgr.ChangeFarm(invalidFarm));
         // Assert
@@ -114,7 +120,7 @@ public class ManagerTests
         Assert.Contains("Established year cannot be in the future", exception.Message, StringComparison.OrdinalIgnoreCase);
 
         /* mock-verification */
-        _mock.Verify(repo => repo.UpdateFarm(It.IsAny<Farm>()), Times.Never);
+        _mock.VerifyAll();
     }
 
     #endregion

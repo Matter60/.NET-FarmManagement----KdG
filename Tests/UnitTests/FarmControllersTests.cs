@@ -41,6 +41,10 @@ public class FarmControllersTests
 
         _ctr.ModelState.AddModelError("Name", "The Name field is required");
 
+        _mock.Setup(mgr => mgr.AddFarm(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(),
+                It.IsAny<double?>(), It.IsAny<string>()))
+            .Verifiable(Times.Never);
+
         // Act
         var result = _ctr.Add(vm);
 
@@ -50,10 +54,7 @@ public class FarmControllersTests
         Assert.Equal("Add", viewResult.ViewName ?? nameof(FarmController.Add));
 
         /* mock-verification */
-        _mock.Verify(
-            mgr => mgr.AddFarm(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(),
-                It.IsAny<double?>(), It.IsAny<string>()),
-            Times.Never);
+        _mock.VerifyAll();
     }
 
     [Fact]
@@ -119,7 +120,8 @@ public class FarmControllersTests
             Id = farmId, Name = "Sunny Farm", Location = "Belgium", EstablishedYear = 2000
         };
 
-        _mock.Setup(mgr => mgr.GetFarmWithAnimalsAndMaintainer(farmId)).Returns(farm);
+        _mock.Setup(mgr => mgr.GetFarmWithAnimalsAndMaintainer(farmId)).Returns(farm)
+            .Verifiable(Times.Once);
 
         // Act
         var result = _ctr.Details(farmId);
@@ -130,7 +132,7 @@ public class FarmControllersTests
         Assert.Equal(farm, viewResult.Model);
 
         /* mock-verification */
-        _mock.Verify(mgr => mgr.GetFarmWithAnimalsAndMaintainer(farmId), Times.Once);
+        _mock.VerifyAll();
     }
 
     [Fact]
@@ -138,7 +140,8 @@ public class FarmControllersTests
     {
         // Arrange
         var nonExistingId = -1;
-        _mock.Setup(mgr => mgr.GetFarmWithAnimalsAndMaintainer(nonExistingId)).Returns((Farm)null);
+        _mock.Setup(mgr => mgr.GetFarmWithAnimalsAndMaintainer(nonExistingId)).Returns((Farm)null)
+            .Verifiable(Times.Once);
 
         // Act
         var result = _ctr.Details(nonExistingId);
@@ -149,7 +152,7 @@ public class FarmControllersTests
         Assert.Null(viewResult.Model);
 
         /* mock-verification */
-        _mock.Verify(mgr => mgr.GetFarmWithAnimalsAndMaintainer(nonExistingId), Times.Once);
+        _mock.VerifyAll();
     }
 
     #endregion

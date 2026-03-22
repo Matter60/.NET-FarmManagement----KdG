@@ -20,12 +20,6 @@ public class IdentitySeeder
         const string admin = "Admin";
         const string user = "User";
         
-        if (_roleManager.RoleExistsAsync("Admin").GetAwaiter().GetResult()) 
-            return;
-        
-        if (_roleManager.RoleExistsAsync("User").GetAwaiter().GetResult())
-            return;
-        
         var adminRole = new IdentityRole(admin);
         _roleManager.CreateAsync(adminRole).GetAwaiter().GetResult();
         
