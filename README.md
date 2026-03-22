@@ -168,7 +168,6 @@ dotnet test
 
 
 - `FarmManagement.UI.MVC.Tests.UnitTests.FarmControllersTests.cs`
-- `FarmManagement.UI.MVC.Tests.UnitTests.ManagerTests.cs`
 
 
 ### GitLab pipeline links
