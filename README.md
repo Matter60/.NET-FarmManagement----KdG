@@ -161,14 +161,14 @@ dotnet test
 
 ### FQN authorization
 
-- `Tests.IntegrationTests.FarmControllersTests.cs`
+- `FarmManagement.UI.MVC.Tests.IntegrationTests.FarmControllersTests.cs`
 
 
 ### FQN verification
 
 
-- `Tests.UnitTests.FarmControllersTests.cs`
-- `Tests.UnitTests.ManagerTests.cs`
+- `FarmManagement.UI.MVC.Tests.UnitTests.FarmControllersTests.cs`
+- `FarmManagement.UI.MVC.Tests.UnitTests.ManagerTests.cs`
 
 
 ### GitLab pipeline links
